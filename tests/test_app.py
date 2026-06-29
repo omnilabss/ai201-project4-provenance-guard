@@ -149,6 +149,9 @@ class TestSubmitEndpoint(unittest.TestCase):
 
     def setUp(self):
         self.client = app.test_client()
+        # Reset rate limiter storage so prior tests don't bleed through
+        from app import limiter
+        limiter.reset()
 
     def _mock_llm(self, score):
         """Return a patcher that makes llm_signal return a fixed score."""
@@ -220,6 +223,8 @@ class TestAppealEndpoint(unittest.TestCase):
 
     def setUp(self):
         self.client = app.test_client()
+        from app import limiter
+        limiter.reset()
 
     def _create_submission(self):
         with patch("app.llm_signal", return_value=0.85):
@@ -281,6 +286,8 @@ class TestLogEndpoint(unittest.TestCase):
 
     def setUp(self):
         self.client = app.test_client()
+        from app import limiter
+        limiter.reset()
 
     def test_log_returns_list(self):
         resp = self.client.get("/log")
