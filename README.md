@@ -319,7 +319,7 @@ appeal_reasoning  — Creator's reasoning (null until appealed)
 appeal_timestamp  — UTC timestamp of appeal (null until appealed)
 ```
 
-**Sample log entries (from GET /log):**
+**Sample log entries (from GET /log after running `python3 populate_audit_log.py`):**
 
 ```json
 [
